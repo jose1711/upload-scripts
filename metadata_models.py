@@ -516,6 +516,16 @@ class CameraParameters(MetadataItem):
                             CameraParameters)
         return parser
 
+    @classmethod
+    def parser_v2(cls) -> ItemParser:
+        """This method is returns a CameraParameters ItemParser for CameraParameters row
+        version 2"""
+        parser = ItemParser(2, {'v_fov': 0,
+                                'v_zf': 1,
+                                'aperture': 2},
+                            CameraParameters)
+        return parser
+
 
 class ExifParameters(MetadataItem):
     """ExifParameters is a MetadataItem model class that can represent a row form Metadata Format"""
@@ -546,6 +556,15 @@ class ExifParameters(MetadataItem):
                                 'f_number': 1},
                             ExifParameters)
         return parser
+
+    @classmethod
+    def parser_v2(cls) -> ItemParser:
+        """This method is returns a ExifParameters ItemParser for ExifParameters row version 2"""
+        parser = ItemParser(2, {'focal_lenght': 0,
+                                'img_width': 1,
+                                'img_height': 2},
+                            ExifParameters)
+        return parser
 # </editor-fold>
 
 
@@ -561,8 +580,8 @@ def _available_parsers() -> [ItemParser]:
     gravity_parser = Gravity.parser_v1()
     device_parser = Device.parser_v1()
     device_motion_pars = DeviceMotion.parser_v1()
-    camera_parser = CameraParameters.parser_v1()
-    exif_parser = ExifParameters.parser_v1()
+    camera_parser = CameraParameters.parser_v2()
+    exif_parser = ExifParameters.parser_v2()
 
     parsers = [photo_parser,
                gps_parser,
